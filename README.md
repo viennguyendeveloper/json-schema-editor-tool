@@ -9,7 +9,7 @@ A json-schema editor of high efficient and easy-to-use, base on React.
 ## Usage
 
 ```
-npm install json-schema-editor-visual
+npm install json-schema-editor-tool
 ```
 
 ```js
