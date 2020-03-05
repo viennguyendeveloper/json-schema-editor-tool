@@ -1,6 +1,6 @@
 {
   "name": "json-schema-editor-tool",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "json schema editor tool",
   "main": "package/index.js",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-app": "^3.1.0",
+    "core-js": "^2.5.7",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.11",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
