@@ -27,10 +27,6 @@ import AceEditor from "../AceEditor/AceEditor.js";
 import LocalProvider from "../LocalProvider/index.js";
 
 const changeOtherValue = (value, name, data, change) => {
-  console.log("value: ", value);
-  console.log("data: ", data);
-  console.log("name: ", name);
-
   data[name] = value;
   change(data);
 };
