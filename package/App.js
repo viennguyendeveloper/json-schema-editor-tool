@@ -4,7 +4,6 @@ import {
   Row,
   Tooltip,
   Col,
-  Form,
   Select,
   Checkbox,
   Button,
@@ -12,9 +11,7 @@ import {
   Modal,
   message,
   Tabs,
-  AutoComplete,
 } from "antd";
-const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
