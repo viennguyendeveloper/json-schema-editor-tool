@@ -1,14 +1,14 @@
-import React from 'react';
-import mockEditor from './mockEditor';
-import PropTypes from 'prop-types';
-import _ from 'underscore';
+import React from "react";
+import mockEditor from "./mockEditor";
+import PropTypes from "prop-types";
+import _ from "underscore";
 
 const ModeMap = {
-  javascript: 'ace/mode/javascript',
-  json: 'ace/mode/json',
-  text: 'ace/mode/text',
-  xml: 'ace/mode/xml',
-  html: 'ace/mode/html'
+  javascript: "ace/mode/javascript",
+  json: "ace/mode/json",
+  text: "ace/mode/text",
+  xml: "ace/mode/xml",
+  html: "ace/mode/html",
 };
 
 function isNotMatch(a, b) {
@@ -36,12 +36,12 @@ class AceEditor extends React.PureComponent {
       data: this.props.data,
       onChange: this.props.onChange,
       readOnly: this.props.readOnly,
-      fullScreen: this.props.fullScreen
+      fullScreen: this.props.fullScreen,
     });
 
-    let mode = this.props.mode || 'javascript';
+    let mode = this.props.mode || "javascript";
     this.editor.editor.getSession().setMode(getMode(mode));
-    if (typeof this.props.callback === 'function') {
+    if (typeof this.props.callback === "function") {
       this.props.callback(this.editor.editor);
     }
   }
@@ -55,7 +55,7 @@ class AceEditor extends React.PureComponent {
     ) {
       this.editor.setValue(nextProps.data);
 
-      let mode = nextProps.mode || 'javascript';
+      let mode = nextProps.mode || "javascript";
       this.editor.editor.getSession().setMode(getMode(mode));
       this.editor.editor.clearSelection();
     }
@@ -66,9 +66,11 @@ class AceEditor extends React.PureComponent {
       <div
         className={this.props.className}
         style={
-          this.props.className ? undefined : this.props.style || { width: '100%', height: '200px' }
+          this.props.className
+            ? undefined
+            : this.props.style || { width: "100%", height: "200px" }
         }
-        ref={editor => {
+        ref={(editor) => {
           this.editorElement = editor;
         }}
       />
@@ -85,7 +87,7 @@ AceEditor.propTypes = {
   callback: PropTypes.func,
   style: PropTypes.object,
   fullScreen: PropTypes.bool,
-  insertCode: PropTypes.func
+  insertCode: PropTypes.func,
 };
 
 export default AceEditor;

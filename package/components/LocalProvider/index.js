@@ -1,5 +1,4 @@
 import utils from "../../utils";
-import React from "react";
 
 const langs = {
   en_US: {
@@ -35,7 +34,7 @@ const langs = {
     enum_desc_msg: "enum description",
     required: "required",
     mock: "mock",
-    mockLink: "Help"
+    mockLink: "Help",
   },
   zh_CN: {
     title: "标题",
@@ -70,16 +69,10 @@ const langs = {
     enum_desc_msg: "备注描述信息",
     required: "是否必须",
     mock: "mock",
-    mockLink: "查看文档"
-  }
+    mockLink: "查看文档",
+  },
 };
 
-export default message => {
+export default (message) => {
   return langs[utils.lang][message];
 };
-
-// exports.LocalProvider = (props)=>{
-//   console.log(langs[utils.lang][props.message])
-//   return <span>{langs[utils.lang][props.message]}</span>
-//   // return langs[utils.lang][props.message]
-// }

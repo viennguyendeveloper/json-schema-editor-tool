@@ -1,30 +1,23 @@
 import React, { PureComponent } from "react";
 import {
-  Dropdown,
-  Menu,
   Input,
   InputNumber,
   Row,
   Col,
-  Form,
   Select,
   Checkbox,
-  Button,
   Icon,
-  Modal,
-  message,
   Tooltip,
   Switch,
 } from "antd";
-const { TextArea } = Input;
 import "./schemaJson.css";
 import _ from "underscore";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { JSONPATH_JOIN_CHAR, SCHEMA_TYPE } from "../../utils.js";
-const Option = Select.Option;
 import AceEditor from "../AceEditor/AceEditor.js";
 import LocalProvider from "../LocalProvider/index.js";
+
+const { TextArea } = Input;
+const Option = Select.Option;
 
 const changeOtherValue = (value, name, data, change) => {
   data[name] = value;

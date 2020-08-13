@@ -22,7 +22,7 @@ const mock = [
   { name: "id", mock: "@id" },
   { name: "guid", mock: "@guid" },
   { name: "当前时间", mock: "@now" },
-  { name: "时间戳", mock: "@timestamp" }
+  { name: "时间戳", mock: "@timestamp" },
 ];
 
 const JEditor1 = jeditor({ mock: mock });
@@ -57,7 +57,7 @@ render(
       showEditor={true}
       isMock={false}
       data={""}
-      onChange={e => {
+      onChange={(e) => {
         console.log("changeValue", e);
       }}
     />
