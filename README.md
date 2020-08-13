@@ -4,7 +4,7 @@ The main package https://github.com/YMFE/json-schema-editor-visual is no longer 
 
 A json-schema editor of high efficient and easy-to-use, base on React.
 
-![avatar](json-schema-editor-visual.jpg)
+![avatar](json-schema-editor-tool.jpg)
 
 ## Usage
 
