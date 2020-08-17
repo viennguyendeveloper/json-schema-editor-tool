@@ -55,7 +55,7 @@ render(
 
     <JEditor1
       showEditor={true}
-      isMock={false}
+      isMock={true}
       data={""}
       onChange={(e) => {
         console.log("changeValue", e);
