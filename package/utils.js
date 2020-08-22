@@ -1,3 +1,5 @@
+import { Model } from "./index";
+
 const JSONPATH_JOIN_CHAR = ".";
 exports.JSONPATH_JOIN_CHAR = JSONPATH_JOIN_CHAR;
 exports.lang = "en_US";
@@ -19,7 +21,7 @@ exports.SCHEMA_TYPE = [
   "boolean",
   "integer",
 ];
-exports.defaultSchema = {
+const defaultSchema = {
   string: {
     type: "string",
   },
@@ -43,6 +45,7 @@ exports.defaultSchema = {
     type: "integer",
   },
 };
+exports.defaultSchema = defaultSchema;
 
 // 防抖函数，减少高频触发的函数执行的频率
 // 请在 constructor 里使用:
@@ -157,3 +160,13 @@ function cloneObject(obj) {
 }
 
 exports.cloneObject = cloneObject;
+
+exports.getSchemaValue = function (value) {
+  // ref options
+  if (value && value.includes("/definitions/")) {
+    return {
+      ref: value,
+    };
+  }
+  return defaultSchema[value];
+};

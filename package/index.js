@@ -6,12 +6,13 @@ import moox from "moox";
 import schema from "./models/schema";
 import PropTypes from "prop-types";
 
+export const Model = moox({
+  schema,
+});
+
 module.exports = (config = {}) => {
   if (config.lang) utils.lang = config.lang;
 
-  const Model = moox({
-    schema,
-  });
   if (config.format) {
     Model.__jsonSchemaFormat = config.format;
   } else {
@@ -21,6 +22,8 @@ module.exports = (config = {}) => {
   if (config.mock) {
     Model.__jsonSchemaMock = config.mock;
   }
+
+  Model.__jsonSchemaRefOptions = config.refOptions ? config.refOptions : [];
 
   const store = Model.getStore();
 

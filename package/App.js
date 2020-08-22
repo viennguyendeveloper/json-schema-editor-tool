@@ -29,6 +29,7 @@ const utils = require("./utils");
 import CustomItem from "./components/SchemaComponents/SchemaOther.js";
 import LocalProvider from "./components/LocalProvider/index.js";
 import MockSelect from "./components/MockSelect/index.js";
+import { Model } from "./index";
 
 class jsonSchema extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class jsonSchema extends React.Component {
       checked: false,
       editorModalName: "", // 弹窗名称desctiption | mock
       mock: "",
+      schemaType: [...SCHEMA_TYPE, ...this.props.Model.__jsonSchemaRefOptions],
     };
     this.Model = this.props.Model.schema;
     this.jsonSchemaData = null;
@@ -114,6 +116,7 @@ class jsonSchema extends React.Component {
       changeCustomValue: this.changeCustomValue,
       Model: this.props.Model,
       isMock: this.props.isMock,
+      schemaType: this.state.schemaType,
     };
   }
 
@@ -121,7 +124,6 @@ class jsonSchema extends React.Component {
     // return message.error(LocalProvider('valid_json'));
   };
 
-  // AceEditor 中的数据
   handleParams = (e) => {
     if (!e.text) return;
     // 将数据map 到store中
@@ -134,7 +136,6 @@ class jsonSchema extends React.Component {
     });
   };
 
-  // 修改数据类型
   changeType = (key, value) => {
     this.Model.changeTypeAction({ key: [key], value });
   };
@@ -261,9 +262,7 @@ class jsonSchema extends React.Component {
     const {
       visible,
       editVisible,
-      description,
       advVisible,
-      type,
       checked,
       editorModalName,
     } = this.state;
@@ -423,12 +422,15 @@ class jsonSchema extends React.Component {
                 <Select
                   className="type-select-style"
                   onChange={(e) => this.changeType(`type`, e)}
-                  value={schema.type || "object"}
+                  value={schema.ref || schema.type || "object"}
                 >
-                  {SCHEMA_TYPE.map((item, index) => {
+                  {this.state.schemaType.map((item, index) => {
                     return (
-                      <Option value={item} key={index}>
-                        {item}
+                      <Option
+                        value={typeof item === "object" ? item.value : item}
+                        key={index}
+                      >
+                        {typeof item === "object" ? item.label : item}
                       </Option>
                     );
                   })}
@@ -488,14 +490,19 @@ class jsonSchema extends React.Component {
                 />
               </Col>
               <Col span={2} className="col-item col-item-setting">
-                <span
-                  className="adv-set"
-                  onClick={() => this.showAdv([], this.props.schema)}
-                >
-                  <Tooltip placement="top" title={LocalProvider("adv_setting")}>
-                    <Icon type="setting" />
-                  </Tooltip>
-                </span>
+                {!schema.ref && (
+                  <span
+                    className="adv-set"
+                    onClick={() => this.showAdv([], this.props.schema)}
+                  >
+                    <Tooltip
+                      placement="top"
+                      title={LocalProvider("adv_setting")}
+                    >
+                      <Icon type="setting" />
+                    </Tooltip>
+                  </span>
+                )}
                 {schema.type === "object" ? (
                   <span onClick={() => this.addChildField("properties")}>
                     <Tooltip
@@ -527,6 +534,7 @@ jsonSchema.childContextTypes = {
   changeCustomValue: PropTypes.func,
   Model: PropTypes.object,
   isMock: PropTypes.bool,
+  schemaType: PropTypes.array,
 };
 
 jsonSchema.propTypes = {

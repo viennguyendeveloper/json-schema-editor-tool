@@ -1,8 +1,6 @@
 import "./polyfills";
 import React from "react";
 import { render } from "react-dom";
-import { Provider } from "react-redux";
-import { combineReducers, createStore, applyMiddleware } from "redux";
 import "antd/dist/antd.css";
 
 if (process.env.NODE_ENV !== "production") {
@@ -25,7 +23,13 @@ const mock = [
   { name: "时间戳", mock: "@timestamp" },
 ];
 
-const JEditor1 = jeditor({ mock: mock });
+const JEditor1 = jeditor({
+  mock: mock,
+  // refOptions: [
+  //   { label: "Fragment1", value: "#/definitions/U2NoZW1hTm9kZToxOTE=" },
+  //   { label: "Fragment2", value: "#/definitions/sadsdioasdsdujudnasd=" },
+  // ],
+});
 
 render(
   <div>
@@ -55,20 +59,12 @@ render(
 
     <JEditor1
       showEditor={true}
-      isMock={true}
+      isMock={false}
       data={""}
       onChange={(e) => {
         console.log("changeValue", e);
       }}
     />
-
-    {/* <JEditor2
-      showEditor={true}
-      data={null}
-      onChange={e => {
-        // console.log("changeValue", e);
-      }}
-    /> */}
   </div>,
   document.getElementById("root")
 );

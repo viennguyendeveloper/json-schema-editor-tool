@@ -14,7 +14,7 @@ import FieldInput from "./FieldInput";
 const Option = Select.Option;
 import _ from "underscore";
 import PropTypes from "prop-types";
-import { JSONPATH_JOIN_CHAR, SCHEMA_TYPE } from "../../utils.js";
+import { JSONPATH_JOIN_CHAR } from "../../utils.js";
 import LocaleProvider from "../LocalProvider/index.js";
 import MockSelect from "../MockSelect/index.js";
 import { mapping } from "./SchemaJson";
@@ -189,12 +189,15 @@ class SchemaItem extends PureComponent {
             <Select
               className="type-select-style"
               onChange={this.handleChangeType}
-              value={value.type}
+              value={value.ref || value.type}
             >
-              {SCHEMA_TYPE.map((item, index) => {
+              {this.context.schemaType.map((item, index) => {
                 return (
-                  <Option value={item} key={index}>
-                    {item}
+                  <Option
+                    value={typeof item === "object" ? item.value : item}
+                    key={index}
+                  >
+                    {typeof item === "object" ? item.label : item}
                   </Option>
                 );
               })}
@@ -249,11 +252,13 @@ class SchemaItem extends PureComponent {
             span={this.context.isMock ? 2 : 3}
             className="col-item col-item-setting"
           >
-            <span className="adv-set" onClick={this.handleShowAdv}>
-              <Tooltip placement="top" title={LocaleProvider("adv_setting")}>
-                <Icon type="setting" />
-              </Tooltip>
-            </span>
+            {!value.ref && (
+              <span className="adv-set" onClick={this.handleShowAdv}>
+                <Tooltip placement="top" title={LocaleProvider("adv_setting")}>
+                  <Icon type="setting" />
+                </Tooltip>
+              </span>
+            )}
             <span className="delete-item" onClick={this.handleDeleteItem}>
               <Icon type="close" className="close" />
             </span>
@@ -283,6 +288,7 @@ SchemaItem.contextTypes = {
   getOpenValue: PropTypes.func,
   Model: PropTypes.object,
   isMock: PropTypes.bool,
+  schemaType: PropTypes.array,
 };
 
 export default SchemaItem;

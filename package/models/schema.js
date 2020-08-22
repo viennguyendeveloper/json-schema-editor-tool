@@ -85,8 +85,8 @@ export default {
     if (parentData.type === value) {
       return;
     }
-    // let newParentData = utils.defaultSchema[value];
-    let newParentDataItem = utils.defaultSchema[value];
+    // let newParentDataItem = utils.defaultSchema[value];
+    let newParentDataItem = utils.getSchemaValue(value);
 
     // 将备注过滤出来
     let parentDataItem = parentData.description
@@ -95,6 +95,7 @@ export default {
     let newParentData = Object.assign({}, newParentDataItem, parentDataItem);
 
     let newKeys = [].concat("data", parentKeys);
+
     utils.setData(state, newKeys, newParentData);
   },
 

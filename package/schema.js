@@ -11,7 +11,9 @@ function handleType(schema) {
 }
 
 function handleSchema(schema) {
-  if (schema && !schema.type && !schema.properties) {
+  if (schema && schema.ref) {
+    // do nothing with ref option
+  } else if (schema && !schema.type && !schema.properties) {
     schema.type = "string";
   }
   handleType(schema);

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Row, Col, Select, Checkbox, Icon, Input, Tooltip } from "antd";
 import PropTypes from "prop-types";
 import _ from "underscore";
-import { JSONPATH_JOIN_CHAR, SCHEMA_TYPE } from "../../utils";
+import { JSONPATH_JOIN_CHAR } from "../../utils";
 import MockSelect from "../MockSelect";
 import LocaleProvider from "../LocalProvider/index.js";
 import { mapping } from "./SchemaJson";
@@ -132,12 +132,15 @@ class SchemaArray extends PureComponent {
                 name="itemtype"
                 className="type-select-style"
                 onChange={this.handleChangeType}
-                value={items.type}
+                value={items.ref || items.type}
               >
-                {SCHEMA_TYPE.map((item, index) => {
+                {this.context.schemaType.map((item, index) => {
                   return (
-                    <Option value={item} key={index}>
-                      {item}
+                    <Option
+                      value={typeof item === "object" ? item.value : item}
+                      key={index}
+                    >
+                      {typeof item === "object" ? item.label : item}
                     </Option>
                   );
                 })}
@@ -188,11 +191,16 @@ class SchemaArray extends PureComponent {
               span={this.context.isMock ? 2 : 3}
               className="col-item col-item-setting"
             >
-              <span className="adv-set" onClick={this.handleShowAdv}>
-                <Tooltip placement="top" title={LocaleProvider("adv_setting")}>
-                  <Icon type="setting" />
-                </Tooltip>
-              </span>
+              {!items.ref && (
+                <span className="adv-set" onClick={this.handleShowAdv}>
+                  <Tooltip
+                    placement="top"
+                    title={LocaleProvider("adv_setting")}
+                  >
+                    <Icon type="setting" />
+                  </Tooltip>
+                </span>
+              )}
 
               {items.type === "object" ? (
                 <span onClick={this.handleAddChildField}>
@@ -219,6 +227,7 @@ SchemaArray.contextTypes = {
   getOpenValue: PropTypes.func,
   Model: PropTypes.object,
   isMock: PropTypes.bool,
+  schemaType: PropTypes.array,
 };
 
 export default SchemaArray;
