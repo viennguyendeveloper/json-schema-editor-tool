@@ -1,6 +1,6 @@
 {
   "name": "json-schema-editor-tool",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "json schema editor tool",
   "main": "package/index.js",
   "license": "ISC",
