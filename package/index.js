@@ -23,8 +23,6 @@ module.exports = (config = {}) => {
     Model.__jsonSchemaMock = config.mock;
   }
 
-  Model.__jsonSchemaRefOptions = config.refOptions ? config.refOptions : [];
-
   const store = Model.getStore();
 
   const Component = (props) => {

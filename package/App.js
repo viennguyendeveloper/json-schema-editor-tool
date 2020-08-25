@@ -35,6 +35,7 @@ class jsonSchema extends React.Component {
   constructor(props) {
     super(props);
     this.alterMsg = debounce(this.alterMsg, 2000);
+    const refOptions = props.refOptions ? props.refOptions : [];
     this.state = {
       visible: false,
       show: true,
@@ -47,7 +48,7 @@ class jsonSchema extends React.Component {
       checked: false,
       editorModalName: "", // 弹窗名称desctiption | mock
       mock: "",
-      schemaType: [...SCHEMA_TYPE, ...this.props.Model.__jsonSchemaRefOptions],
+      schemaType: [...SCHEMA_TYPE, ...refOptions],
     };
     this.Model = this.props.Model.schema;
     this.jsonSchemaData = null;
@@ -93,6 +94,12 @@ class jsonSchema extends React.Component {
       this.Model.changeEditorSchemaAction({
         value: JSON.parse(nextProps.data),
       });
+    }
+    if (
+      this.props.refOptions &&
+      this.props.refOptions.length !== nextProps.refOptions.length
+    ) {
+      this.setState({ schemaType: [...SCHEMA_TYPE, ...nextProps.refOptions] });
     }
   }
 

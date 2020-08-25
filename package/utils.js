@@ -1,5 +1,3 @@
-import { Model } from "./index";
-
 const JSONPATH_JOIN_CHAR = ".";
 exports.JSONPATH_JOIN_CHAR = JSONPATH_JOIN_CHAR;
 exports.lang = "en_US";
