@@ -189,7 +189,7 @@ class SchemaItem extends PureComponent {
             <Select
               className="type-select-style"
               onChange={this.handleChangeType}
-              value={value.ref || value.type}
+              value={value.$ref || value.type}
             >
               {this.context.schemaType.map((item, index) => {
                 return (
@@ -252,7 +252,7 @@ class SchemaItem extends PureComponent {
             span={this.context.isMock ? 2 : 3}
             className="col-item col-item-setting"
           >
-            {!value.ref && (
+            {!value.$ref && (
               <span className="adv-set" onClick={this.handleShowAdv}>
                 <Tooltip placement="top" title={LocaleProvider("adv_setting")}>
                   <Icon type="setting" />

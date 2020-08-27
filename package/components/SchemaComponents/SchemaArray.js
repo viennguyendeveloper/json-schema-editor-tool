@@ -132,7 +132,7 @@ class SchemaArray extends PureComponent {
                 name="itemtype"
                 className="type-select-style"
                 onChange={this.handleChangeType}
-                value={items.ref || items.type}
+                value={items.$ref || items.type}
               >
                 {this.context.schemaType.map((item, index) => {
                   return (
@@ -191,7 +191,7 @@ class SchemaArray extends PureComponent {
               span={this.context.isMock ? 2 : 3}
               className="col-item col-item-setting"
             >
-              {!items.ref && (
+              {!items.$ref && (
                 <span className="adv-set" onClick={this.handleShowAdv}>
                   <Tooltip
                     placement="top"

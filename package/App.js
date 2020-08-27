@@ -429,7 +429,7 @@ class jsonSchema extends React.Component {
                 <Select
                   className="type-select-style"
                   onChange={(e) => this.changeType(`type`, e)}
-                  value={schema.ref || schema.type || "object"}
+                  value={schema.$ref || schema.type || "object"}
                 >
                   {this.state.schemaType.map((item, index) => {
                     return (
@@ -497,7 +497,7 @@ class jsonSchema extends React.Component {
                 />
               </Col>
               <Col span={2} className="col-item col-item-setting">
-                {!schema.ref && (
+                {!schema.$ref && (
                   <span
                     className="adv-set"
                     onClick={() => this.showAdv([], this.props.schema)}

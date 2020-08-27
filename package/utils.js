@@ -160,10 +160,10 @@ function cloneObject(obj) {
 exports.cloneObject = cloneObject;
 
 exports.getSchemaValue = function (value) {
-  // ref options
+  // $ref options
   if (value && value.includes("/definitions/")) {
     return {
-      ref: value,
+      $ref: value,
     };
   }
   return defaultSchema[value];

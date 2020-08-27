@@ -25,10 +25,6 @@ const mock = [
 
 const JEditor1 = jeditor({
   mock: mock,
-  // refOptions: [
-  //   { label: "Fragment1", value: "#/definitions/U2NoZW1hTm9kZToxOTE=" },
-  //   { label: "Fragment2", value: "#/definitions/sadsdioasdsdujudnasd=" },
-  // ],
 });
 
 render(
@@ -60,6 +56,10 @@ render(
     <JEditor1
       showEditor={true}
       isMock={false}
+      refOptions={[
+        { label: "Fragment1", value: "#/definitions/U2NoZW1hTm9kZToxOTE=" },
+        { label: "Fragment2", value: "#/definitions/sadsdioasdsdujudnasd=" },
+      ]}
       data={""}
       onChange={(e) => {
         console.log("changeValue", e);
