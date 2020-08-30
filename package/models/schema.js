@@ -1,6 +1,5 @@
 const _ = require("underscore");
 import utils from "../utils";
-let fieldNum = 1;
 import handleSchema from "../schema.js";
 
 export default {
@@ -153,6 +152,7 @@ export default {
     let name = action.name;
     let propertiesData = utils.getData(oldData, keys);
     let newPropertiesData = {};
+    const highestFieldNum = utils.getHighestFieldNum(oldData);
 
     let parentKeys = utils.getParentKeys(keys);
     let parentData = utils.getData(oldData, parentKeys);
@@ -160,14 +160,14 @@ export default {
 
     if (!name) {
       newPropertiesData = Object.assign({}, propertiesData);
-      let ranName = "field_" + fieldNum++;
+      let ranName = "field_" + highestFieldNum;
       newPropertiesData[ranName] = utils.defaultSchema.string;
       requiredData.push(ranName);
     } else {
       for (let i in propertiesData) {
         newPropertiesData[i] = propertiesData[i];
         if (i === name) {
-          let ranName = "field_" + fieldNum++;
+          let ranName = "field_" + highestFieldNum;
           newPropertiesData[ranName] = utils.defaultSchema.string;
           requiredData.push(ranName);
         }
@@ -183,9 +183,9 @@ export default {
     let oldData = oldState.data;
     let propertiesData = utils.getData(oldData, keys);
     let newPropertiesData = {};
-
+    const highestFieldNum = utils.getHighestFieldNum(oldData);
     newPropertiesData = Object.assign({}, propertiesData);
-    let ranName = "field_" + fieldNum++;
+    let ranName = "field_" + highestFieldNum;
     newPropertiesData[ranName] = utils.defaultSchema.string;
     utils.setData(state.data, keys, newPropertiesData);
 

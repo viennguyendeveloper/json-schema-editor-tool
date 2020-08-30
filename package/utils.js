@@ -168,3 +168,17 @@ exports.getSchemaValue = function (value) {
   }
   return defaultSchema[value];
 };
+
+exports.getHighestFieldNum = function (data = {}) {
+  const arrFields = JSON.stringify(data).match(/field_\w*/g) || [];
+  let fieldNum = 0;
+  arrFields.forEach((item) => {
+    if (item) {
+      const newFieldNum = parseInt(item.split("field_")[1]);
+      if (newFieldNum > fieldNum) {
+        fieldNum = newFieldNum;
+      }
+    }
+  });
+  return fieldNum + 1;
+};
