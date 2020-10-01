@@ -24,7 +24,10 @@ export default {
   changeNameAction: function (state, action, oldState) {
     const keys = action.prefix;
     const name = action.name;
-    const value = action.value;
+    let value = action.value;
+    if (typeof action.formatName === "function") {
+      value = action.formatName(action.value);
+    }
     let oldData = oldState.data;
     let parentKeys = utils.getParentKeys(keys);
     let parentData = utils.getData(oldData, parentKeys);
@@ -52,7 +55,6 @@ export default {
       if (item === name) return value;
       return item;
     });
-
     parentKeys.push("required");
     utils.setData(state.data, parentKeys, requiredData);
 

@@ -49,7 +49,12 @@ class SchemaItem extends PureComponent {
       return message.error(`The field "${value}" already exists.`);
     }
 
-    this.Model.changeNameAction({ value, prefix, name });
+    this.Model.changeNameAction({
+      value,
+      prefix,
+      name,
+      formatName: this.props.formatName,
+    });
   };
 
   // 修改备注信息
@@ -286,6 +291,7 @@ class SchemaItem extends PureComponent {
 
 SchemaItem.contextTypes = {
   getOpenValue: PropTypes.func,
+  formatName: PropTypes.func,
   Model: PropTypes.object,
   isMock: PropTypes.bool,
   schemaType: PropTypes.array,

@@ -527,6 +527,7 @@ class jsonSchema extends React.Component {
                 data={this.props.schema}
                 showEdit={this.showEdit}
                 showAdv={this.showAdv}
+                formatName={this.props.formatName}
               />
             )}
           </Col>
@@ -547,6 +548,7 @@ jsonSchema.childContextTypes = {
 jsonSchema.propTypes = {
   data: PropTypes.string,
   onChange: PropTypes.func,
+  formatName: PropTypes.func,
   showEditor: PropTypes.bool,
   isMock: PropTypes.bool,
   Model: PropTypes.object,

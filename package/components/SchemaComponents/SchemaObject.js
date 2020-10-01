@@ -16,7 +16,7 @@ class SchemaObjectComponent extends Component {
   }
 
   render() {
-    const { data, prefix, showEdit, showAdv } = this.props;
+    const { data, prefix, showEdit, showAdv, formatName } = this.props;
     return (
       <div className="object-style">
         {Object.keys(data.properties).map((name, index) => (
@@ -27,6 +27,7 @@ class SchemaObjectComponent extends Component {
             prefix={prefix}
             showEdit={showEdit}
             showAdv={showAdv}
+            formatName={formatName}
           />
         ))}
       </div>

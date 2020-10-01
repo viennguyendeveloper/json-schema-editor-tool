@@ -64,6 +64,12 @@ render(
       onChange={(e) => {
         console.log("changeValue", e);
       }}
+      formatName={(name) => {
+        if (name) {
+          return name.replace(/\s/g, "_").replace(/[^\w\s]/gi, "");
+        }
+        return "";
+      }}
     />
   </div>,
   document.getElementById("root")

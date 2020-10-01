@@ -5,7 +5,7 @@ import SchemaArray from "./SchemaArray";
 
 import "./schemaJson.css";
 
-export const mapping = (name, data, showEdit, showAdv) => {
+export const mapping = (name, data, showEdit, showAdv, formatName) => {
   switch (data.type) {
     case "array":
       return (
@@ -24,6 +24,7 @@ export const mapping = (name, data, showEdit, showAdv) => {
           data={data}
           showEdit={showEdit}
           showAdv={showAdv}
+          formatName={formatName}
         />
       );
     default:
@@ -32,12 +33,13 @@ export const mapping = (name, data, showEdit, showAdv) => {
 };
 
 const SchemaJson = (props) => {
-  const item = mapping([], props.data, props.showEdit, props.showAdv);
+  const item = mapping([], props.data, props.showEdit, props.showAdv, props.formatName);
   return <div className="schema-content">{item}</div>;
 };
 
 SchemaJson.contextTypes = {
   getOpenValue: PropTypes.func,
+  formatName: PropTypes.func,
   Model: PropTypes.object,
   isMock: PropTypes.bool,
 };
