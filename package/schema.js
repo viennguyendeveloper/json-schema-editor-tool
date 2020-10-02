@@ -10,7 +10,7 @@ function handleType(schema) {
   }
 }
 
-function handleSchema(schema) {
+function handleSchema(schema, formatName) {
   if (schema && schema.$ref) {
     // do nothing with $ref option
   } else if (schema && !schema.type && !schema.properties) {
@@ -19,19 +19,28 @@ function handleSchema(schema) {
   handleType(schema);
   if (schema.type === "object") {
     if (!schema.properties) schema.properties = {};
-    handleObject(schema.properties, schema);
+    handleObject(schema.properties, formatName);
   } else if (schema.type === "array") {
     if (!schema.items) schema.items = { type: "string" };
-    handleSchema(schema.items);
+    handleSchema(schema.items, formatName);
   } else {
     return schema;
   }
 }
 
-function handleObject(properties) {
+function handleObject(properties, formatName) {
   for (var key in properties) {
+    if (typeof formatName === "function") {
+      var newKey = formatName(key);
+      if (newKey && newKey !== key) {
+        properties[newKey] = properties[key];
+        delete properties[key];
+        key = newKey;
+      }
+    }
+
     handleType(properties[key]);
     if (properties[key].type === "array" || properties[key].type === "object")
-      handleSchema(properties[key]);
+      handleSchema(properties[key], formatName);
   }
 }

@@ -68,12 +68,18 @@ class jsonSchema extends React.Component {
       }
 
       let jsonData = GenerateSchema(this.jsonData);
-      this.Model.changeEditorSchemaAction({ value: jsonData });
+      this.Model.changeEditorSchemaAction({
+        value: jsonData,
+        formatName: this.props.formatName,
+      });
     } else {
       if (!this.jsonSchemaData) {
         return message.error("json 数据格式有误");
       }
-      this.Model.changeEditorSchemaAction({ value: this.jsonSchemaData });
+      this.Model.changeEditorSchemaAction({
+        value: this.jsonSchemaData,
+        formatName: this.props.formatName,
+      });
     }
     this.setState({ visible: false });
   };
@@ -93,6 +99,7 @@ class jsonSchema extends React.Component {
     if (this.props.data && this.props.data !== nextProps.data) {
       this.Model.changeEditorSchemaAction({
         value: JSON.parse(nextProps.data),
+        formatName: this.props.formatName,
       });
     }
     if (
@@ -112,7 +119,10 @@ class jsonSchema extends React.Component {
         "properties":{}
       }`;
     }
-    this.Model.changeEditorSchemaAction({ value: JSON.parse(data) });
+    this.Model.changeEditorSchemaAction({
+      value: JSON.parse(data),
+      formatName: this.props.formatName,
+    });
   }
 
   getChildContext() {
@@ -132,14 +142,17 @@ class jsonSchema extends React.Component {
   };
 
   handleParams = (e) => {
+    console.log("handleParams: ", e);
+
     if (!e.text) return;
     // 将数据map 到store中
     if (e.format !== true) {
       return this.alterMsg();
     }
-    handleSchema(e.jsonData);
+    handleSchema(e.jsonData, this.props.formatName);
     this.Model.changeEditorSchemaAction({
       value: e.jsonData,
+      formatName: this.props.formatName,
     });
   };
 
@@ -229,6 +242,7 @@ class jsonSchema extends React.Component {
     if (this.state.itemKey.length === 0) {
       this.Model.changeEditorSchemaAction({
         value: this.state.curItemCustomValue,
+        formatName: this.props.formatName,
       });
     } else {
       this.Model.changeValueAction({

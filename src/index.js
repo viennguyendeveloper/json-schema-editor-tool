@@ -66,7 +66,7 @@ render(
       }}
       formatName={(name) => {
         if (name) {
-          return name.replace(/\s/g, "_").replace(/[^\w\s]/gi, "");
+          return name.replace(/\s/g, "_").replace(/[^\w]/gi, "");
         }
         return "";
       }}

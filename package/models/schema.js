@@ -17,7 +17,7 @@ export default {
   },
 
   changeEditorSchemaAction: function (state, action) {
-    handleSchema(action.value);
+    handleSchema(action.value, action.formatName);
     state.data = action.value;
   },
 
