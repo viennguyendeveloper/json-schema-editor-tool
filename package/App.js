@@ -133,7 +133,11 @@ class jsonSchema extends React.Component {
       changeCustomValue: this.changeCustomValue,
       Model: this.props.Model,
       isMock: this.props.isMock,
-      schemaType: this.state.schemaType,
+      schemaType: this.props.noChildObject
+        ? this.state.schemaType.filter(
+            (item) => item !== "object" && item !== "array"
+          )
+        : this.state.schemaType,
     };
   }
 
@@ -565,6 +569,7 @@ jsonSchema.propTypes = {
   formatName: PropTypes.func,
   showEditor: PropTypes.bool,
   isMock: PropTypes.bool,
+  noChildObject: PropTypes.bool,
   Model: PropTypes.object,
 };
 

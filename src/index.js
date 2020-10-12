@@ -70,6 +70,7 @@ render(
         }
         return "";
       }}
+      noChildObject
     />
   </div>,
   document.getElementById("root")
